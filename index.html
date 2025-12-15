@@ -3,16 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>KhanaGo • Link Directory</title>
+<title>KHANAGO • LINK DIRECTORY</title>
 
-<!-- =========================
-      GLOBAL STYLES
-========================= -->
 <style>
-
-/* -------------------------
-   CSS VARIABLES
---------------------------*/
+/* ===============================
+   DESIGN SYSTEM
+================================ */
 :root {
   --bg-main: #f5f7fb;
   --bg-card: #ffffff;
@@ -25,15 +21,14 @@
   --primary-soft: #ffe6d5;
 
   --border: #e5e7eb;
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-  --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+  --shadow-sm: 0 6px 16px rgba(0,0,0,0.06);
+  --shadow-md: 0 14px 40px rgba(0,0,0,0.10);
 
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 18px;
 }
 
-/* DARK MODE */
 body.dark {
   --bg-main: #0f172a;
   --bg-card: #020617;
@@ -41,69 +36,57 @@ body.dark {
 
   --text-main: #e5e7eb;
   --text-muted: #94a3b8;
-
   --border: #1e293b;
 }
 
-/* -------------------------
+/* ===============================
    RESET
---------------------------*/
-* {
-  box-sizing: border-box;
-}
+================================ */
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
   padding: 0;
   background: var(--bg-main);
   color: var(--text-main);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  transition: background .3s ease, color .3s ease;
+  font-family: Inter, system-ui, sans-serif;
+  transition: background .3s, color .3s;
 }
 
-/* -------------------------
-   APP LAYOUT
---------------------------*/
+/* ===============================
+   LAYOUT
+================================ */
 .app {
   display: flex;
   min-height: 100vh;
 }
 
-/* -------------------------
+/* ===============================
    SIDEBAR
---------------------------*/
+================================ */
 .sidebar {
   width: 260px;
   background: var(--bg-card);
   border-right: 1px solid var(--border);
   padding: 20px;
-  display: flex;
-  flex-direction: column;
 }
 
 .brand {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--primary);
   margin-bottom: 30px;
 }
 
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 .nav button {
   all: unset;
+  display: block;
   padding: 12px 14px;
+  margin-bottom: 6px;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .nav button.active,
@@ -112,18 +95,18 @@ html, body {
   color: var(--primary);
 }
 
-/* -------------------------
-   MAIN CONTENT
---------------------------*/
+/* ===============================
+   MAIN
+================================ */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* -------------------------
-   TOP BAR
---------------------------*/
+/* ===============================
+   TOPBAR
+================================ */
 .topbar {
   height: 64px;
   background: var(--bg-card);
@@ -134,28 +117,24 @@ html, body {
   justify-content: space-between;
 }
 
-.topbar h2 {
-  margin: 0;
-  font-size: 18px;
-}
-
 .toggle {
   cursor: pointer;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   background: var(--bg-muted);
+  font-weight: 600;
 }
 
-/* -------------------------
-   CONTENT AREA
---------------------------*/
+/* ===============================
+   CONTENT
+================================ */
 .content {
   padding: 24px;
 }
 
-/* -------------------------
+/* ===============================
    CARDS
---------------------------*/
+================================ */
 .card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -164,41 +143,53 @@ html, body {
   margin-bottom: 20px;
 }
 
-.card h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-}
-
-/* -------------------------
+/* ===============================
    DASHBOARD GRID
---------------------------*/
-.stats {
+================================ */
+.dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
 }
 
-.stat {
-  padding: 18px;
+.category-box {
+  background: var(--bg-card);
   border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-md);
+}
+
+.category-box h3 {
+  margin: 0 0 12px;
+  color: var(--primary);
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* ===============================
+   LINKS
+================================ */
+.link-item {
+  padding: 10px 12px;
   background: var(--bg-muted);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
 }
 
-.stat h4 {
-  margin: 0;
-  font-size: 14px;
-  color: var(--text-muted);
+.link-item a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.stat p {
-  margin: 6px 0 0;
-  font-size: 26px;
-  font-weight: 700;
+.link-item a:hover {
+  color: var(--primary);
 }
 
-/* -------------------------
+/* ===============================
    FORMS
---------------------------*/
+================================ */
 input, select, button {
   width: 100%;
   padding: 12px;
@@ -213,52 +204,18 @@ button.primary {
   background: var(--primary);
   color: white;
   border: none;
+  font-weight: 700;
   cursor: pointer;
-  font-weight: 600;
 }
 
-button.primary:hover {
-  opacity: .9;
-}
+/* ===============================
+   UTILS
+================================ */
+.hidden { display: none; }
 
-/* -------------------------
-   CATEGORY LIST
---------------------------*/
-.category {
-  margin-bottom: 18px;
+@media(max-width:900px){
+  .sidebar { display: none; }
 }
-
-.category h4 {
-  margin-bottom: 10px;
-  color: var(--primary);
-}
-
-.link-item {
-  padding: 10px 12px;
-  background: var(--bg-muted);
-  border-radius: var(--radius-sm);
-  margin-bottom: 6px;
-}
-
-.link-item a {
-  color: var(--text-main);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.hidden {
-  display: none;
-}
-
-/* -------------------------
-   MOBILE
---------------------------*/
-@media (max-width: 900px) {
-  .sidebar {
-    display: none;
-  }
-}
-
 </style>
 </head>
 
@@ -268,20 +225,20 @@ button.primary:hover {
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="brand">🍽️ KhanaGo</div>
+    <div class="brand">KHANAGO</div>
     <div class="nav">
-      <button class="active" onclick="openTab(0)">📊 Dashboard</button>
-      <button onclick="openTab(1)">🔗 Manage Links</button>
+      <button class="active" onclick="openTab(0)">DASHBOARD</button>
+      <button onclick="openTab(1)">MANAGE LINKS</button>
     </div>
   </aside>
 
   <!-- MAIN -->
   <div class="main">
 
-    <!-- TOP BAR -->
+    <!-- TOPBAR -->
     <div class="topbar">
-      <h2 id="pageTitle">Dashboard</h2>
-      <div class="toggle" onclick="toggleMode()">🌗 Theme</div>
+      <h2 id="pageTitle">DASHBOARD</h2>
+      <div class="toggle" onclick="toggleMode()">🌗 MODE</div>
     </div>
 
     <!-- CONTENT -->
@@ -289,51 +246,36 @@ button.primary:hover {
 
       <!-- DASHBOARD -->
       <div class="tab">
-        <div class="stats">
-          <div class="stat">
-            <h4>Total Categories</h4>
-            <p id="catCount">0</p>
-          </div>
-          <div class="stat">
-            <h4>Total Links</h4>
-            <p id="linkCount">0</p>
-          </div>
-        </div>
+        <div id="dashboardGrid" class="dashboard-grid"></div>
       </div>
 
-      <!-- MANAGE LINKS -->
+      <!-- MANAGE -->
       <div class="tab hidden">
 
         <div class="card">
-          <h3>Create Category</h3>
-          <input id="catName" placeholder="e.g. Admin, Marketing, Tech">
-          <button class="primary" onclick="addCategory()">Add Category</button>
+          <h3>CREATE CATEGORY</h3>
+          <input id="catName" placeholder="CATEGORY NAME">
+          <button class="primary" onclick="addCategory()">ADD CATEGORY</button>
         </div>
 
         <div class="card">
-          <h3>Add Link</h3>
-          <input id="linkName" placeholder="Link name">
-          <input id="linkUrl" placeholder="https://">
+          <h3>ADD LINK</h3>
+          <input id="linkName" placeholder="LINK NAME">
+          <input id="linkUrl" placeholder="HTTPS://">
           <select id="catSelect"></select>
-          <button class="primary" onclick="addLink()">Add Link</button>
+          <button class="primary" onclick="addLink()">ADD LINK</button>
         </div>
-
-        <div id="directory"></div>
 
       </div>
 
     </div>
   </div>
-
 </div>
 
-<!-- =========================
-      JAVASCRIPT
-========================= -->
 <script>
-
 let data = {};
 
+/* TABS */
 function openTab(i){
   document.querySelectorAll('.tab').forEach((t,idx)=>{
     t.classList.toggle('hidden', idx!==i);
@@ -341,56 +283,59 @@ function openTab(i){
   document.querySelectorAll('.nav button').forEach((b,idx)=>{
     b.classList.toggle('active', idx===i);
   });
-  pageTitle.innerText = i===0 ? "Dashboard" : "Manage Links";
+  pageTitle.innerText = i===0 ? "DASHBOARD" : "MANAGE LINKS";
 }
 
+/* THEME */
 function toggleMode(){
   document.body.classList.toggle('dark');
 }
 
+/* DATA */
 function addCategory(){
-  if(!catName.value) return;
-  data[catName.value] = [];
-  catName.value="";
+  const c = catName.value.trim().toUpperCase();
+  if(!c) return;
+  data[c] = [];
+  catName.value = "";
   refresh();
 }
 
 function addLink(){
-  if(!catSelect.value) return;
-  data[catSelect.value].push({
-    n: linkName.value,
+  const c = catSelect.value;
+  if(!c) return;
+  data[c].push({
+    n: linkName.value.toUpperCase(),
     u: linkUrl.value
   });
-  linkName.value="";
-  linkUrl.value="";
+  linkName.value = "";
+  linkUrl.value = "";
   refresh();
 }
 
+/* RENDER */
 function refresh(){
-  catSelect.innerHTML="";
-  directory.innerHTML="";
-  let totalLinks = 0;
+  dashboardGrid.innerHTML = "";
+  catSelect.innerHTML = "";
 
-  Object.keys(data).forEach(c=>{
-    catSelect.innerHTML+=`<option>${c}</option>`;
-    let card=document.createElement("div");
-    card.className="card category";
-    card.innerHTML=`<h4>${c}</h4>`;
-    data[c].forEach(l=>{
-      totalLinks++;
-      card.innerHTML+=`
+  Object.keys(data).forEach(cat=>{
+    catSelect.innerHTML += `<option>${cat}</option>`;
+
+    let box = document.createElement("div");
+    box.className = "category-box";
+    box.innerHTML = `<h3>${cat}</h3>`;
+
+    data[cat].forEach(l=>{
+      box.innerHTML += `
         <div class="link-item">
           <a href="${l.u}" target="_blank">${l.n}</a>
         </div>`;
     });
-    directory.appendChild(card);
+
+    dashboardGrid.appendChild(box);
   });
-
-  catCount.innerText = Object.keys(data).length;
-  linkCount.innerText = totalLinks;
 }
-
 </script>
 
 </body>
 </html>
+
