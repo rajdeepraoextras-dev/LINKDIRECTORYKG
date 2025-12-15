@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KhanaGo | Link Directory</title>
+
+<style>
+:root {
+  --primary: #ff6b00;
+  --dark: #1f1f1f;
+  --light: #ffffff;
+  --bg: #f4f6f8;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #ff6b00, #ff8c1a);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 15px;
+}
+
+/* FORM */
+.form-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.form-card h3 {
+  margin-top: 0;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* CATEGORY */
+.category {
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+}
+
+.category h2 {
+  margin: 0 0 10px;
+  color: var(--primary);
+}
+
+/* LINKS */
+.link-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.link-item a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.link-item a:hover {
+  color: var(--primary);
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  header h1 {
+    font-size: 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🍽️ KhanaGo Link Directory</h1>
+  <p>Manage all important links category-wise</p>
+</header>
+
+<div class="container">
+
+  <!-- ADD CATEGORY -->
+  <div class="form-card">
+    <h3>➕ Create Category</h3>
+    <input type="text" id="categoryName" placeholder="Category Name">
+    <button onclick="addCategory()">Add Category</button>
+  </div>
+
+  <!-- ADD LINK -->
+  <div class="form-card">
+    <h3>🔗 Add Link</h3>
+    <input type="text" id="linkName" placeholder="Link Name">
+    <input type="url" id="linkURL" placeholder="https://example.com">
+    <select id="categorySelect"></select>
+    <button onclick="addLink()">Add Link</button>
+  </div>
+
+  <!-- DIRECTORY -->
+  <div id="directory"></div>
+
+</div>
+
+<script>
+let categories = {};
+
+function addCategory() {
+  const name = document.getElementById("categoryName").value.trim();
+  if (!name) return alert("Enter category name");
+
+  if (!categories[name]) {
+    categories[name] = [];
+    updateCategorySelect();
+    render();
+    document.getElementById("categoryName").value = "";
+  }
+}
+
+function updateCategorySelect() {
+  const select = document.getElementById("categorySelect");
+  select.innerHTML = "";
+  Object.keys(categories).forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    select.appendChild(option);
+  });
+}
+
+function addLink() {
+  const name = document.getElementById("linkName").value;
+  const url = document.getElementById("linkURL").value;
+  const cat = document.getElementById("categorySelect").value;
+
+  if (!name || !url || !cat) {
+    alert("Fill all fields");
+    return;
+  }
+
+  categories[cat].push({ name, url });
+  document.getElementById("linkName").value = "";
+  document.getElementById("linkURL").value = "";
+  render();
+}
+
+function render() {
+  const dir = document.getElementById("directory");
+  dir.innerHTML = "";
+
+  Object.keys(categories).forEach(cat => {
+    const div = document.createElement("div");
+    div.className = "category";
+
+    div.innerHTML = `<h2>${cat}</h2>`;
+
+    categories[cat].forEach(link => {
+      const item = document.createElement("div");
+      item.className = "link-item";
+      item.innerHTML = `<a href="${link.url}" target="_blank">${link.name}</a>`;
+      div.appendChild(item);
+    });
+
+    dir.appendChild(div);
+  });
+}
+</script>
+
+</body>
+</html>
