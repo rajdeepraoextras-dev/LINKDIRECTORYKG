@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KhanaGo | Link Directory</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KhanaGo | Admin Links</title>
 
 <style>
 :root {
-  --primary: #ff6b00;
-  --dark: #1f1f1f;
-  --light: #ffffff;
   --bg: #f4f6f8;
+  --card: #ffffff;
+  --text: #1f1f1f;
+  --primary: #ff6b00;
+}
+
+body.dark {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #f1f1f1;
 }
 
 * {
@@ -21,203 +27,259 @@
 body {
   margin: 0;
   background: var(--bg);
+  color: var(--text);
+}
+
+/* LOGIN */
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 14px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: var(--primary);
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* HEADER */
 header {
   background: linear-gradient(135deg, #ff6b00, #ff8c1a);
   color: white;
-  padding: 20px;
-  text-align: center;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header h1 {
   margin: 0;
-  font-size: 26px;
+  font-size: 22px;
 }
 
-header p {
-  margin: 5px 0 0;
-  font-size: 14px;
+/* TOGGLE */
+.toggle {
+  cursor: pointer;
+  font-size: 18px;
 }
 
-/* CONTAINER */
-.container {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 15px;
+/* TABS */
+.tabs {
+  display: flex;
+  background: var(--card);
 }
 
-/* FORM */
-.form-card {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
-}
-
-.form-card h3 {
-  margin-top: 0;
-}
-
-input, select, button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background: var(--primary);
-  color: white;
+.tabs button {
+  flex: 1;
+  background: none;
+  color: var(--text);
   border: none;
+  padding: 14px;
   font-weight: bold;
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.9;
+.tabs button.active {
+  border-bottom: 3px solid var(--primary);
+  color: var(--primary);
 }
 
-/* CATEGORY */
-.category {
-  background: white;
-  border-radius: 10px;
-  margin-bottom: 15px;
+/* CONTENT */
+.container {
   padding: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.07);
 }
 
-.category h2 {
-  margin: 0 0 10px;
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.category {
+  margin-bottom: 15px;
+}
+
+.category h3 {
   color: var(--primary);
 }
 
-/* LINKS */
-.link-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f9f9f9;
+.link {
+  background: var(--bg);
   padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 8px;
+  border-radius: 8px;
+  margin-top: 6px;
 }
 
-.link-item a {
+.link a {
   text-decoration: none;
-  color: var(--dark);
-  font-weight: 500;
+  color: var(--text);
 }
 
-.link-item a:hover {
-  color: var(--primary);
-}
-
-/* MOBILE */
-@media(max-width:600px){
-  header h1 {
-    font-size: 22px;
-  }
+.hidden {
+  display: none;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+<div class="login" id="login">
+  <div class="login-card">
+    <h2>🔐 KhanaGo Admin</h2>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+
 <header>
-  <h1>🍽️ KhanaGo Link Directory</h1>
-  <p>Manage all important links category-wise</p>
+  <h1>🍽️ KhanaGo</h1>
+  <div class="toggle" onclick="toggleMode()">🌗</div>
 </header>
+
+<div class="tabs">
+  <button class="active" onclick="openTab(0)">Dashboard</button>
+  <button onclick="openTab(1)">Manage Links</button>
+  <button onclick="openTab(2)">Credentials</button>
+</div>
 
 <div class="container">
 
-  <!-- ADD CATEGORY -->
-  <div class="form-card">
-    <h3>➕ Create Category</h3>
-    <input type="text" id="categoryName" placeholder="Category Name">
-    <button onclick="addCategory()">Add Category</button>
+  <!-- DASHBOARD -->
+  <div class="tab">
+    <div class="card">
+      <h2>Welcome, Deep CEO 👋</h2>
+      <p>Use tabs to manage KhanaGo important links.</p>
+    </div>
   </div>
 
-  <!-- ADD LINK -->
-  <div class="form-card">
-    <h3>🔗 Add Link</h3>
-    <input type="text" id="linkName" placeholder="Link Name">
-    <input type="url" id="linkURL" placeholder="https://example.com">
-    <select id="categorySelect"></select>
-    <button onclick="addLink()">Add Link</button>
+  <!-- MANAGE LINKS -->
+  <div class="tab hidden">
+    <div class="card">
+      <h3>Create Category</h3>
+      <input id="catName" placeholder="Category name">
+      <button onclick="addCategory()">Add Category</button>
+    </div>
+
+    <div class="card">
+      <h3>Add Link</h3>
+      <input id="linkName" placeholder="Link name">
+      <input id="linkUrl" placeholder="https://">
+      <select id="catSelect"></select>
+      <button onclick="addLink()">Add Link</button>
+    </div>
+
+    <div id="directory"></div>
   </div>
 
-  <!-- DIRECTORY -->
-  <div id="directory"></div>
+  <!-- CREDENTIALS -->
+  <div class="tab hidden">
+    <div class="card">
+      <h3>Master Credentials</h3>
+      <p><b>Username:</b> deepceo</p>
+      <p><b>Password:</b> @DeepCeo</p>
+      <p style="opacity:.7">Future: multiple users, roles & permissions</p>
+    </div>
+  </div>
 
+</div>
 </div>
 
 <script>
-let categories = {};
-
-function addCategory() {
-  const name = document.getElementById("categoryName").value.trim();
-  if (!name) return alert("Enter category name");
-
-  if (!categories[name]) {
-    categories[name] = [];
-    updateCategorySelect();
-    render();
-    document.getElementById("categoryName").value = "";
+/* LOGIN */
+function login(){
+  const u = user.value;
+  const p = pass.value;
+  if(u === "deepceo" && p === "@DeepCeo"){
+    login.classList.add("hidden");
+    app.classList.remove("hidden");
+  } else {
+    alert("Invalid credentials");
   }
 }
 
-function updateCategorySelect() {
-  const select = document.getElementById("categorySelect");
-  select.innerHTML = "";
-  Object.keys(categories).forEach(cat => {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    select.appendChild(option);
+/* TABS */
+function openTab(i){
+  document.querySelectorAll(".tab").forEach((t,idx)=>{
+    t.classList.toggle("hidden", idx!==i);
+  });
+  document.querySelectorAll(".tabs button").forEach((b,idx)=>{
+    b.classList.toggle("active", idx===i);
   });
 }
 
-function addLink() {
-  const name = document.getElementById("linkName").value;
-  const url = document.getElementById("linkURL").value;
-  const cat = document.getElementById("categorySelect").value;
-
-  if (!name || !url || !cat) {
-    alert("Fill all fields");
-    return;
-  }
-
-  categories[cat].push({ name, url });
-  document.getElementById("linkName").value = "";
-  document.getElementById("linkURL").value = "";
-  render();
+/* DARK MODE */
+function toggleMode(){
+  document.body.classList.toggle("dark");
 }
 
-function render() {
-  const dir = document.getElementById("directory");
-  dir.innerHTML = "";
+/* LINK LOGIC */
+let data = {};
 
-  Object.keys(categories).forEach(cat => {
-    const div = document.createElement("div");
-    div.className = "category";
+function addCategory(){
+  const c = catName.value.trim();
+  if(!c) return;
+  data[c]=[];
+  catName.value="";
+  refresh();
+}
 
-    div.innerHTML = `<h2>${cat}</h2>`;
+function addLink(){
+  const c = catSelect.value;
+  if(!c) return;
+  data[c].push({n:linkName.value,u:linkUrl.value});
+  linkName.value="";
+  linkUrl.value="";
+  refresh();
+}
 
-    categories[cat].forEach(link => {
-      const item = document.createElement("div");
-      item.className = "link-item";
-      item.innerHTML = `<a href="${link.url}" target="_blank">${link.name}</a>`;
-      div.appendChild(item);
+function refresh(){
+  catSelect.innerHTML="";
+  directory.innerHTML="";
+  Object.keys(data).forEach(c=>{
+    catSelect.innerHTML+=`<option>${c}</option>`;
+    let div=document.createElement("div");
+    div.className="card category";
+    div.innerHTML=`<h3>${c}</h3>`;
+    data[c].forEach(l=>{
+      div.innerHTML+=`<div class="link"><a target="_blank" href="${l.u}">${l.n}</a></div>`;
     });
-
-    dir.appendChild(div);
+    directory.appendChild(div);
   });
 }
 </script>
 
 </body>
 </html>
+
