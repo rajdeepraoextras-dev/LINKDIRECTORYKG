@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>KhanaGo | Admin Links</title>
+<title>KhanaGo | Link Directory</title>
 
 <style>
 :root {
@@ -28,43 +28,6 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-}
-
-/* LOGIN */
-.login {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-card {
-  background: var(--card);
-  padding: 25px;
-  border-radius: 14px;
-  width: 320px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.15);
-}
-
-.login-card h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-input, button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background: var(--primary);
-  border: none;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 /* HEADER */
@@ -122,10 +85,6 @@ header h1 {
   box-shadow: 0 6px 18px rgba(0,0,0,.08);
 }
 
-.category {
-  margin-bottom: 15px;
-}
-
 .category h3 {
   color: var(--primary);
 }
@@ -150,19 +109,6 @@ header h1 {
 
 <body>
 
-<!-- LOGIN -->
-<div class="login" id="login">
-  <div class="login-card">
-    <h2>🔐 KhanaGo Admin</h2>
-    <input id="user" placeholder="Username">
-    <input id="pass" type="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-  </div>
-</div>
-
-<!-- APP -->
-<div id="app" class="hidden">
-
 <header>
   <h1>🍽️ KhanaGo</h1>
   <div class="toggle" onclick="toggleMode()">🌗</div>
@@ -171,7 +117,6 @@ header h1 {
 <div class="tabs">
   <button class="active" onclick="openTab(0)">Dashboard</button>
   <button onclick="openTab(1)">Manage Links</button>
-  <button onclick="openTab(2)">Credentials</button>
 </div>
 
 <div class="container">
@@ -179,8 +124,8 @@ header h1 {
   <!-- DASHBOARD -->
   <div class="tab">
     <div class="card">
-      <h2>Welcome, Deep CEO 👋</h2>
-      <p>Use tabs to manage KhanaGo important links.</p>
+      <h2>Welcome 👋</h2>
+      <p>All your important KhanaGo links in one place.</p>
     </div>
   </div>
 
@@ -203,32 +148,9 @@ header h1 {
     <div id="directory"></div>
   </div>
 
-  <!-- CREDENTIALS -->
-  <div class="tab hidden">
-    <div class="card">
-      <h3>Master Credentials</h3>
-      <p><b>Username:</b> deepceo</p>
-      <p><b>Password:</b> @DeepCeo</p>
-      <p style="opacity:.7">Future: multiple users, roles & permissions</p>
-    </div>
-  </div>
-
-</div>
 </div>
 
 <script>
-/* LOGIN */
-function login(){
-  const u = user.value;
-  const p = pass.value;
-  if(u === "deepceo" && p === "@DeepCeo"){
-    login.classList.add("hidden");
-    app.classList.remove("hidden");
-  } else {
-    alert("Invalid credentials");
-  }
-}
-
 /* TABS */
 function openTab(i){
   document.querySelectorAll(".tab").forEach((t,idx)=>{
@@ -244,42 +166,46 @@ function toggleMode(){
   document.body.classList.toggle("dark");
 }
 
-/* LINK LOGIC */
+/* LINKS */
 let data = {};
 
 function addCategory(){
-  const c = catName.value.trim();
-  if(!c) return;
-  data[c]=[];
-  catName.value="";
+  if(!catName.value) return;
+  data[catName.value] = [];
+  catName.value = "";
   refresh();
 }
 
 function addLink(){
-  const c = catSelect.value;
-  if(!c) return;
-  data[c].push({n:linkName.value,u:linkUrl.value});
-  linkName.value="";
-  linkUrl.value="";
+  if(!catSelect.value) return;
+  data[catSelect.value].push({
+    n: linkName.value,
+    u: linkUrl.value
+  });
+  linkName.value = "";
+  linkUrl.value = "";
   refresh();
 }
 
 function refresh(){
-  catSelect.innerHTML="";
-  directory.innerHTML="";
+  catSelect.innerHTML = "";
+  directory.innerHTML = "";
   Object.keys(data).forEach(c=>{
-    catSelect.innerHTML+=`<option>${c}</option>`;
-    let div=document.createElement("div");
-    div.className="card category";
-    div.innerHTML=`<h3>${c}</h3>`;
+    catSelect.innerHTML += `<option>${c}</option>`;
+    let d = document.createElement("div");
+    d.className = "card category";
+    d.innerHTML = `<h3>${c}</h3>`;
     data[c].forEach(l=>{
-      div.innerHTML+=`<div class="link"><a target="_blank" href="${l.u}">${l.n}</a></div>`;
+      d.innerHTML += `<div class="link">
+        <a href="${l.u}" target="_blank">${l.n}</a>
+      </div>`;
     });
-    directory.appendChild(div);
+    directory.appendChild(d);
   });
 }
 </script>
 
 </body>
 </html>
+
 
