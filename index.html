@@ -1,91 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KHANAGO • LINK DIRECTORY</title>
 
+<!-- =========================
+     DESIGN SYSTEM
+========================= -->
 <style>
-/* ===============================
-   DESIGN SYSTEM
-================================ */
 :root {
-  --bg-main: #f5f7fb;
+  --bg-main: #f4f6fb;
   --bg-card: #ffffff;
-  --bg-muted: #eef1f7;
+  --bg-soft: #eef2ff;
 
-  --text-main: #1e293b;
+  --text-main: #0f172a;
   --text-muted: #64748b;
 
   --primary: #ff6b00;
-  --primary-soft: #ffe6d5;
+  --primary-soft: #ffe5d1;
 
   --border: #e5e7eb;
-  --shadow-sm: 0 6px 16px rgba(0,0,0,0.06);
-  --shadow-md: 0 14px 40px rgba(0,0,0,0.10);
 
   --radius-sm: 10px;
   --radius-md: 14px;
-  --radius-lg: 18px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 6px 18px rgba(0,0,0,.06);
+  --shadow-lg: 0 18px 45px rgba(0,0,0,.12);
 }
 
 body.dark {
-  --bg-main: #0f172a;
+  --bg-main: #0b1220;
   --bg-card: #020617;
-  --bg-muted: #020617;
+  --bg-soft: #020617;
 
   --text-main: #e5e7eb;
   --text-muted: #94a3b8;
+
   --border: #1e293b;
 }
 
-/* ===============================
+/* =========================
    RESET
-================================ */
+========================= */
 * { box-sizing: border-box; }
 
 html, body {
   margin: 0;
   padding: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
-  font-family: Inter, system-ui, sans-serif;
-  transition: background .3s, color .3s;
+  transition: all .3s ease;
 }
 
-/* ===============================
+/* =========================
    LAYOUT
-================================ */
+========================= */
 .app {
   display: flex;
   min-height: 100vh;
 }
 
-/* ===============================
+/* =========================
    SIDEBAR
-================================ */
+========================= */
 .sidebar {
-  width: 260px;
+  width: 270px;
   background: var(--bg-card);
   border-right: 1px solid var(--border);
-  padding: 20px;
+  padding: 22px;
 }
 
 .brand {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 900;
   color: var(--primary);
-  margin-bottom: 30px;
+  margin-bottom: 35px;
+  letter-spacing: 1px;
 }
 
 .nav button {
   all: unset;
-  display: block;
-  padding: 12px 14px;
-  margin-bottom: 6px;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 8px;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.6px;
   color: var(--text-muted);
 }
 
@@ -95,123 +99,148 @@ html, body {
   color: var(--primary);
 }
 
-/* ===============================
+/* =========================
    MAIN
-================================ */
+========================= */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* ===============================
-   TOPBAR
-================================ */
+/* =========================
+   TOP BAR
+========================= */
 .topbar {
-  height: 64px;
+  height: 68px;
   background: var(--bg-card);
   border-bottom: 1px solid var(--border);
-  padding: 0 24px;
+  padding: 0 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+.topbar h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
 .toggle {
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: var(--radius-sm);
-  background: var(--bg-muted);
-  font-weight: 600;
+  background: var(--bg-soft);
+  font-weight: 700;
 }
 
-/* ===============================
+/* =========================
    CONTENT
-================================ */
+========================= */
 .content {
-  padding: 24px;
+  padding: 26px;
 }
 
-/* ===============================
-   CARDS
-================================ */
-.card {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-/* ===============================
-   DASHBOARD GRID
-================================ */
-.dashboard-grid {
+/* =========================
+   DIRECTORY GRID
+========================= */
+.directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
 }
 
 .category-box {
   background: var(--bg-card);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-lg);
+  transition: transform .2s ease;
+}
+
+.category-box:hover {
+  transform: translateY(-4px);
 }
 
 .category-box h3 {
-  margin: 0 0 12px;
-  color: var(--primary);
+  margin: 0 0 14px;
   font-size: 15px;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  color: var(--primary);
 }
 
-/* ===============================
+/* =========================
    LINKS
-================================ */
+========================= */
 .link-item {
-  padding: 10px 12px;
-  background: var(--bg-muted);
+  padding: 12px 14px;
+  background: var(--bg-soft);
   border-radius: var(--radius-sm);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .link-item a {
   text-decoration: none;
   color: var(--text-main);
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
 }
 
 .link-item a:hover {
   color: var(--primary);
 }
 
-/* ===============================
+/* =========================
    FORMS
-================================ */
+========================= */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 22px;
+}
+
+.card h3 {
+  margin-top: 0;
+  letter-spacing: 1px;
+}
+
 input, select, button {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 14px;
+  margin-top: 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--bg-card);
   color: var(--text-main);
+  font-weight: 600;
 }
 
 button.primary {
   background: var(--primary);
   color: white;
   border: none;
-  font-weight: 700;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
-/* ===============================
-   UTILS
-================================ */
+button.primary:hover {
+  opacity: .92;
+}
+
+/* =========================
+   UTIL
+========================= */
 .hidden { display: none; }
+
+.loader {
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: .7;
+}
 
 @media(max-width:900px){
   .sidebar { display: none; }
@@ -227,7 +256,7 @@ button.primary {
   <aside class="sidebar">
     <div class="brand">KHANAGO</div>
     <div class="nav">
-      <button class="active" onclick="openTab(0)">DASHBOARD</button>
+      <button class="active" onclick="openTab(0)">LINK DIRECTORY</button>
       <button onclick="openTab(1)">MANAGE LINKS</button>
     </div>
   </aside>
@@ -235,18 +264,19 @@ button.primary {
   <!-- MAIN -->
   <div class="main">
 
-    <!-- TOPBAR -->
+    <!-- TOP BAR -->
     <div class="topbar">
-      <h2 id="pageTitle">DASHBOARD</h2>
+      <h2 id="pageTitle">LINK DIRECTORY</h2>
       <div class="toggle" onclick="toggleMode()">🌗 MODE</div>
     </div>
 
     <!-- CONTENT -->
     <div class="content">
 
-      <!-- DASHBOARD -->
+      <!-- DIRECTORY -->
       <div class="tab">
-        <div id="dashboardGrid" class="dashboard-grid"></div>
+        <div id="loader" class="loader">LOADING LINKS...</div>
+        <div id="directoryGrid" class="directory-grid"></div>
       </div>
 
       <!-- MANAGE -->
@@ -263,7 +293,7 @@ button.primary {
           <input id="linkName" placeholder="LINK NAME">
           <input id="linkUrl" placeholder="HTTPS://">
           <select id="catSelect"></select>
-          <button class="primary" onclick="addLink()">ADD LINK</button>
+          <button class="primary" onclick="addLink()">SAVE TO GOOGLE SHEET</button>
         </div>
 
       </div>
@@ -273,53 +303,53 @@ button.primary {
 </div>
 
 <script>
+/* =========================
+   CONFIG
+========================= */
+const API_URL = "https://script.google.com/macros/s/AKfycbzLgUEOrkwEd8X7fuPDAWEqQUIpfiX0sICawu-Q-OV82ApsALwYlYYfZV-IG2r5rrgrGQ/exec";
+
 let data = {};
 
-/* TABS */
+/* =========================
+   NAV
+========================= */
 function openTab(i){
-  document.querySelectorAll('.tab').forEach((t,idx)=>{
-    t.classList.toggle('hidden', idx!==i);
+  document.querySelectorAll(".tab").forEach((t,idx)=>{
+    t.classList.toggle("hidden", idx!==i);
   });
-  document.querySelectorAll('.nav button').forEach((b,idx)=>{
-    b.classList.toggle('active', idx===i);
+  document.querySelectorAll(".nav button").forEach((b,idx)=>{
+    b.classList.toggle("active", idx===i);
   });
-  pageTitle.innerText = i===0 ? "DASHBOARD" : "MANAGE LINKS";
+  pageTitle.innerText = i===0 ? "LINK DIRECTORY" : "MANAGE LINKS";
 }
 
-/* THEME */
+/* =========================
+   THEME
+========================= */
 function toggleMode(){
-  document.body.classList.toggle('dark');
+  document.body.classList.toggle("dark");
 }
 
-/* DATA */
-function addCategory(){
-  const c = catName.value.trim().toUpperCase();
-  if(!c) return;
-  data[c] = [];
-  catName.value = "";
-  refresh();
+/* =========================
+   FETCH DATA
+========================= */
+function loadLinks(){
+  fetch(API_URL + "?action=fetch")
+    .then(r => r.json())
+    .then(res => {
+      data = res || {};
+      renderDirectory();
+      populateCategories();
+      loader.style.display = "none";
+    });
 }
 
-function addLink(){
-  const c = catSelect.value;
-  if(!c) return;
-  data[c].push({
-    n: linkName.value.toUpperCase(),
-    u: linkUrl.value
-  });
-  linkName.value = "";
-  linkUrl.value = "";
-  refresh();
-}
-
-/* RENDER */
-function refresh(){
-  dashboardGrid.innerHTML = "";
-  catSelect.innerHTML = "";
-
+/* =========================
+   RENDER
+========================= */
+function renderDirectory(){
+  directoryGrid.innerHTML = "";
   Object.keys(data).forEach(cat=>{
-    catSelect.innerHTML += `<option>${cat}</option>`;
-
     let box = document.createElement("div");
     box.className = "category-box";
     box.innerHTML = `<h3>${cat}</h3>`;
@@ -327,15 +357,53 @@ function refresh(){
     data[cat].forEach(l=>{
       box.innerHTML += `
         <div class="link-item">
-          <a href="${l.u}" target="_blank">${l.n}</a>
+          <a href="${l.url}" target="_blank">${l.name}</a>
         </div>`;
     });
 
-    dashboardGrid.appendChild(box);
+    directoryGrid.appendChild(box);
   });
 }
+
+function populateCategories(){
+  catSelect.innerHTML = "";
+  Object.keys(data).forEach(c=>{
+    catSelect.innerHTML += `<option>${c}</option>`;
+  });
+}
+
+/* =========================
+   ADD
+========================= */
+function addCategory(){
+  const c = catName.value.trim().toUpperCase();
+  if(!c) return;
+  if(!data[c]) data[c] = [];
+  catName.value="";
+  populateCategories();
+}
+
+function addLink(){
+  fetch(API_URL + "?action=add", {
+    method: "POST",
+    body: JSON.stringify({
+      category: catSelect.value,
+      name: linkName.value.toUpperCase(),
+      url: linkUrl.value
+    })
+  }).then(()=>{
+    linkName.value="";
+    linkUrl.value="";
+    loadLinks();
+    openTab(0);
+  });
+}
+
+/* =========================
+   INIT
+========================= */
+loadLinks();
 </script>
 
 </body>
 </html>
-
